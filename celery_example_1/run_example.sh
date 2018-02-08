@@ -1,0 +1,1 @@
+celery worker --app main --concurrency 4 & python run.py
