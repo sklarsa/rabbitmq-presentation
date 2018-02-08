@@ -5,7 +5,7 @@ pid2=$!
 
 python run.py
 
-sleep 20s
+sleep 25s
 
 kill $pid1
 kill $pid2
