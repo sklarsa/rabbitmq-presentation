@@ -1,3 +1,9 @@
+# Python stuff
 *.pyc
 venv/
+
+# IDE
 *.sublime-*
+
+# Celery
+results.db
