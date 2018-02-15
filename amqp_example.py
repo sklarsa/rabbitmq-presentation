@@ -33,7 +33,7 @@ class Consumer(object):
 
     def get_message(self, queue):
         channel = self.connection.channel()
-        method_frame, header_frame, body = channel.basic_get(queue)
+        method_frame, _, body = channel.basic_get(queue)
         if method_frame:
             channel.basic_ack(method_frame.delivery_tag)
         return body
