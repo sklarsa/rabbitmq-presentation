@@ -10,7 +10,7 @@ def init_rabbitmq():
 
     channel.exchange_declare(EXCHANGE_NAME, "topic")
     channel.queue_declare(QUEUE_NAME, durable=True)
-    channel.queue_bind(QUEUE_NAME, EXCHANGE_NAME, "*")
+    channel.queue_bind(QUEUE_NAME, EXCHANGE_NAME, "#")
 
     connection.close()
 
