@@ -1,16 +1,16 @@
 import pika
 
-EXCHANGE_NAME = 'foo'
-QUEUE_NAME = 'bar'
+EXCHANGE_NAME = "my-exchange"
+QUEUE_NAME = "my-queue"
 
 
 def init_rabbitmq():
     connection = pika.BlockingConnection()
     channel = connection.channel()
 
-    channel.exchange_declare(EXCHANGE_NAME, "topic")
+    channel.exchange_declare(EXCHANGE_NAME, "direct")
     channel.queue_declare(QUEUE_NAME, durable=True)
-    channel.queue_bind(QUEUE_NAME, EXCHANGE_NAME, "#")
+    channel.queue_bind(QUEUE_NAME, EXCHANGE_NAME, "routing.key")
 
     connection.close()
 
@@ -45,7 +45,7 @@ def hello_world():
     conn = pika.BlockingConnection()
 
     p = Producer(conn)
-    p.send_message("Hello World!", EXCHANGE_NAME, "test")
+    p.send_message("Hello World!", EXCHANGE_NAME, "routing.key")
 
     c = Consumer(conn)
     print(c.get_message(QUEUE_NAME))
