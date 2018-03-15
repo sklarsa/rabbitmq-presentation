@@ -1,4 +1,4 @@
-celery worker --app main --concurrency 4 &
+celery worker --app main --concurrency 4 -n worker-1 &
 pid1=$!
 python run.py
 
