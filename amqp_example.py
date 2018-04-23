@@ -5,37 +5,37 @@ QUEUE_NAME = "my-queue"
 
 
 def init_rabbitmq():
-    connection = pika.BlockingConnection()
-    channel = connection.channel()
+    conn = pika.BlockingConnection()
+    chan = conn.channel()
 
-    channel.exchange_declare(EXCHANGE_NAME, "direct")
-    channel.queue_declare(QUEUE_NAME, durable=True)
-    channel.queue_bind(QUEUE_NAME, EXCHANGE_NAME, "routing.key")
+    chan.exchange_declare(EXCHANGE_NAME, "direct")
+    chan.queue_declare(QUEUE_NAME, durable=True)
+    chan.queue_bind(QUEUE_NAME, EXCHANGE_NAME, "routing.key")
 
-    connection.close()
+    conn.close()
 
 
 class Producer(object):
 
-    def __init__(self, connection):
-        self.connection = connection
+    def __init__(self, conn):
+        self.connection = conn
 
-    def send_message(self, message, exchange, routing_key):
-        channel = self.connection.channel()
-        channel.basic_publish(exchange, routing_key, message)
-        channel.close()
+    def send_message(self, msg, exch, routing_key):
+        chan = self.connection.channel()
+        chan.basic_publish(exch, routing_key, msg)
+        chan.close()
 
 
 class Consumer(object):
 
-    def __init__(self, connection):
-        self.connection = connection
+    def __init__(self, conn):
+        self.connection = conn
 
     def get_message(self, queue):
-        channel = self.connection.channel()
-        method_frame, _, body = channel.basic_get(queue)
+        chan = self.connection.channel()
+        method_frame, _, body = chan.basic_get(queue)
         if method_frame:
-            channel.basic_ack(method_frame.delivery_tag)
+            chan.basic_ack(method_frame.delivery_tag)
         return body
 
 
