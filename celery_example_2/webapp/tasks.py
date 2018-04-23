@@ -3,6 +3,6 @@ from main import app
 
 
 @app.task
-def run_user_query(length):
+def run_user_query():
     print("Running user query...")
-    time.sleep(length)
+    time.sleep(0.1)
