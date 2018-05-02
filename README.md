@@ -15,6 +15,19 @@ ln -sfv /usr/local/opt/rabbitmq/*.plist ~/Library/LaunchAgents
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.rabbitmq.plist
 ```
 
+Clone the repository
+```
+git clone https://github.com/sklarsa/rabbitmq-presentation.git
+```
+
+Create a virtual environment and install the requirements
+```
+cd rabbitmq-presentation
+virtualenv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
 ## Examples
 |Path|Description|How to run|
 |----|-----------|----------|
