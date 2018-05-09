@@ -5,6 +5,9 @@ QUEUE_NAME = "my-queue"
 
 
 def init_rabbitmq():
+    """
+    Initializes the RabbitMQ environment used for this example
+    """
     conn = pika.BlockingConnection()
     chan = conn.channel()
 
@@ -16,7 +19,9 @@ def init_rabbitmq():
 
 
 class Producer(object):
-
+    """
+    An object that sends messages to a RabbitMQ broker
+    """
     def __init__(self, conn):
         self.connection = conn
 
@@ -27,6 +32,9 @@ class Producer(object):
 
 
 class Consumer(object):
+    """
+    An object that reads messages from a RabbitMQ broker
+    """
 
     def __init__(self, conn):
         self.connection = conn

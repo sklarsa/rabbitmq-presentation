@@ -8,6 +8,8 @@ AE_NAME = "my-ae"
 
 
 def ae_example():
+
+    # Just for convenience, use the same setup as the amqp_example
     init_rabbitmq()
 
     connection = pika.BlockingConnection()
@@ -41,9 +43,12 @@ def ae_example():
     channel.queue_bind(QUEUE_NAME, AE_NAME, "")
     channel.close()
 
-    # Now, the message with the bad routing key gets routed to the alternate exchange, which routes the message to the queue
+    # Now, the message with the bad routing key gets routed to the alternate exchange, which routes
+    # the message to the correct queue
     p.send_message("Hello World!", EXCHANGE_WITH_AE, "bad.routing.key")
     print(c.get_message(QUEUE_NAME))
+
+    connection.close()
 
 
 if __name__ == "__main__":
