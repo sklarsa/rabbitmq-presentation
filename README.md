@@ -1,5 +1,7 @@
 # The Hare Wins the Race: Getting the most out of RabbitMQ in distributed applications
 
+Link to the talk: https://www.youtube.com/watch?v=WXkhJ92-fsY
+
 ## Setting up the environment
 
 #### Mac
